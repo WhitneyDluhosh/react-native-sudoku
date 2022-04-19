@@ -1,5 +1,4 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { TouchableOpacity } from 'react-native';
 import {styles} from '../components/styles/index'
 import { Text, View, HomeButton } from '../components/Themed';
 import { RootStackParamList } from '../types';

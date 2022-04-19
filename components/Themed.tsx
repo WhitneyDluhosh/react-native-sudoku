@@ -8,12 +8,15 @@ import { Text as DefaultText, View as DefaultView, TouchableOpacity as DefaultBu
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
+import {getData} from '../async/theme';
+import {useState} from 'react'
 
 export function useThemeColor(
   props: { light?: string; dark?: string },
   colorName: keyof typeof Colors.light & keyof typeof Colors.dark
 ) {
-  const theme = useColorScheme();
+  const [theme, setTheme] = useState(useColorScheme());
+  getData().then((data) => {(data === "light")?setTheme("light"):setTheme("dark")});
   const colorFromProps = props[theme];
 
   if (colorFromProps) {
