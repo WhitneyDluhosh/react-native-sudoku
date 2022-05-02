@@ -9,7 +9,7 @@ export default function GameScreen(props:GameScreenProps) {
   return (
     <View style={styles.layout.container}>
       <Text style={styles.text.h1}>Tab Two</Text>
-      <View style={styles.layout.separator} lightColor="#F2F2F2" darkColor="#ffffff"  />
+      <View style={styles.layout.separator} lightColor={styles.colors.lightPrimary} darkColor={styles.colors.darkPrimary}  />
     </View>
   );
 }

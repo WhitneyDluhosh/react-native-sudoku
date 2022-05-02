@@ -4,19 +4,20 @@
  * https://dev.to/viniciusmdias/how-to-create-a-theme-in-react-typescript-with-styled-components-3fn
  */
 
-import { Text as DefaultText, View as DefaultView, TouchableOpacity as DefaultButton } from 'react-native';
+import { Text as DefaultText, View as DefaultView, TouchableOpacity as DefaultButton,} from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import {getData} from '../async/theme';
 import {useState} from 'react'
+import {styles} from './styles'
 
 export function useThemeColor(
   props: { light?: string; dark?: string },
   colorName: keyof typeof Colors.light & keyof typeof Colors.dark
 ) {
   const [theme, setTheme] = useState(useColorScheme());
-  getData().then((data) => {(data === "light")?setTheme("light"):setTheme("dark")});
+  getData().then((data) => {(data === "light")? setTheme("light"):setTheme("dark")});
   const colorFromProps = props[theme];
 
   if (colorFromProps) {
@@ -60,5 +61,9 @@ export function HomeButton(props: ButtonProps) {
   const { style, lightColor, darkColor, onPress, title, ...otherProps } = props;
   const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
 
-  return (<DefaultButton style={[{ backgroundColor }, style]} onPress={onPress} {...otherProps}><Text>{title}</Text></DefaultButton>);
+  return (<DefaultButton style={[{ backgroundColor: backgroundColor }, style] } onPress={onPress} {...otherProps}><Text style={styles.buttons.buttonText}>{title}</Text></DefaultButton>);
+}
+export function ThemeColor():String{
+  const theme = useThemeColor({ light: 'light', dark: 'dark'}, 'text');
+  return theme as String;
 }
